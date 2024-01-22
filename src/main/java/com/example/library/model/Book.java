@@ -1,5 +1,6 @@
 package com.example.library.model;
 
+import com.example.library.model.enums.Genre;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -39,5 +40,10 @@ public class Book {
 
     @OneToMany(mappedBy = "my_book")
     private List<Transaction> transaction;
+
+    @ManyToOne
+    @JoinColumn
+    private Student student;
+
 
 }

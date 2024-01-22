@@ -27,8 +27,8 @@ public class Student {
     @CreationTimestamp
     private Date createdOn;
 
-//    @OneToMany(mappedBy = "student")
-//    private List<Book> bookList;
+    @OneToMany(mappedBy = "student")
+    private List<Book> bookList;
 
     @UpdateTimestamp
     private Date updatedOn;

@@ -1,5 +1,7 @@
 package com.example.library.model;
 
+import com.example.library.model.enums.TransactionStatus;
+import com.example.library.model.enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
