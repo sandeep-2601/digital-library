@@ -14,11 +14,19 @@ public class AuthorService {
     private AuthorRepository authorRepository;
 
     public Author saveAuthor(CreateAuthorRequest authorRequest) {
-        Author author = Author
+        Author author = getAuthorByEmail(authorRequest.getEmail());
+        if (author != null)
+            return author;
+        author = Author
                 .builder()
                 .name(authorRequest.getName())
                 .country(authorRequest.getName())
+                .email(authorRequest.getEmail())
                 .build();
-       return authorRepository.save(author);
+        return authorRepository.save(author);
+    }
+
+    public Author getAuthorByEmail(String email) {
+        return authorRepository.findAuthorByEmail(email);
     }
 }

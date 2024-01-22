@@ -23,6 +23,9 @@ public class Author {
 
     private String country;
 
+    @Column(unique = true,nullable = false)
+    private String email;
+
     @CreationTimestamp
     private Date addedOn;
 

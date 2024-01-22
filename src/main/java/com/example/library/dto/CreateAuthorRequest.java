@@ -9,5 +9,7 @@ import lombok.*;
 public class CreateAuthorRequest {
     private String name;
     private String country;
-
+    @NonNull
+    private String email;
 }
+
