@@ -2,6 +2,7 @@ package com.example.library.model;
 
 import com.example.library.model.enums.Genre;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,7 +32,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn
-    @JsonBackReference
+    @JsonIgnoreProperties({"bookList"})
     private Author author;
 
     @CreationTimestamp
@@ -41,10 +42,12 @@ public class Book {
     private Date updateOn;
 
     @OneToMany(mappedBy = "my_book")
+    @JsonIgnoreProperties({"my_book"})
     private List<Transaction> transaction;
 
     @ManyToOne
     @JoinColumn
+    @JsonIgnoreProperties({"bookList"})
     private Student student;
 
 

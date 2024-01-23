@@ -1,5 +1,6 @@
 package com.example.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -32,6 +33,6 @@ public class Author {
 
     // a new column need not be created just a back reference is enough
     @OneToMany(mappedBy = "author")
-    @JsonManagedReference
+    @JsonIgnoreProperties({"author"})
     List<Book> bookList;
 }
