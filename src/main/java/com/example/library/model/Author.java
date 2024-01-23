@@ -1,5 +1,6 @@
 package com.example.library.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,5 +32,6 @@ public class Author {
 
     // a new column need not be created just a back reference is enough
     @OneToMany(mappedBy = "author")
+    @JsonManagedReference
     List<Book> bookList;
 }

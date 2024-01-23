@@ -8,6 +8,10 @@ import com.example.library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Service
 public class BookService {
 
@@ -26,5 +30,15 @@ public class BookService {
         return bookRepository.save(book);
     }
 
+    public Book findBookById(int bookId) {
+        Optional<Book> book =  bookRepository.findById(bookId);
+        return book.orElse(null);
+    }
+
+    public Book deleteBookById(int bookId) {
+        Book book = findBookById(bookId);
+        if(book!=null) bookRepository.delete(book);
+        return book;
+    }
 
 }

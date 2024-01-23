@@ -1,6 +1,7 @@
 package com.example.library.model;
 
 import com.example.library.model.enums.Genre;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -30,6 +31,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn
+    @JsonBackReference
     private Author author;
 
     @CreationTimestamp
