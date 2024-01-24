@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @Service
 public class StudentService {
 
@@ -33,6 +35,10 @@ public class StudentService {
         if(student != null)
             studentRepository.delete(student);
         return student;
+    }
+
+    public List<Student> findAllStudents() {
+        return studentRepository.findAll();
     }
 
 }

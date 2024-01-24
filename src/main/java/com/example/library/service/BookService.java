@@ -1,7 +1,6 @@
 package com.example.library.service;
 
 import com.example.library.dto.BookSearchRequest;
-import com.example.library.dto.CreateAuthorRequest;
 import com.example.library.dto.CreateBookRequest;
 import com.example.library.model.Author;
 import com.example.library.model.Book;
@@ -12,8 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
 public class BookService {
@@ -38,10 +35,17 @@ public class BookService {
         return book.orElse(null);
     }
 
+    public Book findBookByName(String name) {
+        return bookRepository.findBookByName(name);
+    }
+
     public Book deleteBookById(int bookId) {
         Book book = findBookById(bookId);
-        if(book!=null) bookRepository.delete(book);
-        return book;
+        if(book!=null) {
+            bookRepository.deleteById(bookId);
+            return book;
+        }
+        return null;
     }
 
     public List<Book> findAllBooks() {
@@ -56,6 +60,10 @@ public class BookService {
             case "name" -> bookRepository.findBooksByNameLike( "%" + bookSearchRequest.getValue() + "%");
             default -> new ArrayList<>();
         };
+    }
+
+    public void saveBook(Book book) {
+        bookRepository.save(book);
     }
 
 }

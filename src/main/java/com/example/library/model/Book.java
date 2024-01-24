@@ -1,7 +1,6 @@
 package com.example.library.model;
 
 import com.example.library.model.enums.Genre;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -41,13 +40,13 @@ public class Book {
     @UpdateTimestamp
     private Date updateOn;
 
-    @OneToMany(mappedBy = "my_book")
-    @JsonIgnoreProperties({"my_book"})
+    @OneToMany(mappedBy = "book")
+    @JsonIgnoreProperties({"book","student"})
     private List<Transaction> transaction;
 
     @ManyToOne
     @JoinColumn
-    @JsonIgnoreProperties({"bookList"})
+    @JsonIgnoreProperties({"bookList","transaction"})
     private Student student;
 
 

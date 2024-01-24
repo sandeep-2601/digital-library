@@ -1,6 +1,7 @@
 package com.example.library.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -35,10 +36,12 @@ public class Student {
     @UpdateTimestamp
     private Date updatedOn;
 
-    @OneToMany(mappedBy = "my_student")
-    @JsonIgnoreProperties({"my_student"})
+    @OneToMany(mappedBy = "student")
+    @JsonManagedReference
     private List<Transaction> transaction;
 
     private Date validity;
+
+    private Double fine;
 
 }

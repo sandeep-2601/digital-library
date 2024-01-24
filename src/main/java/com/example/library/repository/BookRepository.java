@@ -12,4 +12,6 @@ public interface BookRepository extends JpaRepository<Book,Integer> {
     List<Book> findBooksByAuthorName(@Param("authorName") String name);
 
     List<Book> findBooksByNameLike(String bookName);
+
+    Book findBookByName(String name);
 }

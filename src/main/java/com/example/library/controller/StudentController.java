@@ -1,13 +1,19 @@
 package com.example.library.controller;
 
+import com.example.library.dto.BookResponse;
 import com.example.library.dto.CreateStudentRequest;
+import com.example.library.dto.StudentResponse;
+import com.example.library.model.Book;
 import com.example.library.model.Student;
 import com.example.library.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/api/v1/students/")
+import java.util.ArrayList;
+import java.util.List;
+
+@RequestMapping("/api/v1/students")
 @RestController
 public class StudentController {
 
@@ -15,21 +21,35 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping("")
-    public Student createStudent(@RequestBody CreateStudentRequest studentRequest) {
-       return studentService.createStudent(studentRequest);
+    public StudentResponse createStudent(@RequestBody CreateStudentRequest studentRequest) {
+       Student student =  studentService.createStudent(studentRequest);
+       return StudentResponse.from(student);
     }
-    @GetMapping("{studentId}")
-    public Student createStudent(@Valid @PathVariable int studentId) {
-        return studentService.findStudentById(studentId);
+    @GetMapping("/{studentId}")
+    public StudentResponse findStudentById(@Valid @PathVariable int studentId) {
+        Student student = studentService.findStudentById(studentId);
+        return StudentResponse.from(student);
     }
     @PutMapping("")
-    public Student updateStudent(@Valid @RequestBody CreateStudentRequest studentRequest) {
-        return studentService.updateStudent(studentRequest);
+    public StudentResponse updateStudent(@Valid @RequestBody CreateStudentRequest studentRequest) {
+        Student student =  studentService.updateStudent(studentRequest);
+        return StudentResponse.from(student);
     }
 
-    @DeleteMapping("{studentId}")
-    public Student deleteStudent(@Valid @PathVariable int studentId) {
-        return studentService.deleteStudentById(studentId);
+    @DeleteMapping("/{studentId}")
+    public StudentResponse deleteStudent(@Valid @PathVariable int studentId) {
+        Student student =  studentService.deleteStudentById(studentId);
+        return StudentResponse.from(student);
     }
 
+    @GetMapping("")
+    public List<StudentResponse> findAllStudents() {
+        List<StudentResponse> studentResponsesList = new ArrayList<>();
+        List<Student> studentList = studentService.findAllStudents();
+
+        studentList.forEach(student -> {
+            studentResponsesList.add(StudentResponse.from(student));
+        });
+        return studentResponsesList;
+    }
 }
