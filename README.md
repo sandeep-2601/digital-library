@@ -67,6 +67,3 @@ To run the project locally, follow the installation instructions in the respecti
 
 Contributions are welcome! Feel free to open issues or submit pull requests to improve the project.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
