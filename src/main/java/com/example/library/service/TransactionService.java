@@ -88,7 +88,7 @@ public class TransactionService {
             return "Book is not available";
         if(student.getFine() != null && student.getFine()>0)
             return "Please clear your fine of " + student.getFine();
-        if(student.getBookList().size()>maxBooksLimit)
+        if(student.getBookList()!= null && student.getBookList().size()>maxBooksLimit)
             return "You already reached max books that can be issued please return books to collect new ones";
 
         return recordIssueTransaction(TransactionType.ISSUE, book, student);
